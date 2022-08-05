@@ -13,7 +13,9 @@ const spriteHeight = 523;
 let frameX = 0;
 let frameY = 3;
 
-//nombre frame par ligne
+//numero frame par ligne
+let gameFrame = 0;
+const staggerFrames = 5;
 
 //avancer
 let mouvX = 0;
@@ -36,17 +38,19 @@ function animate() {
     CANVAS_WIDTH / 2,
     CANVAS_HEIGHT / 2
   );
-  if (mouvX++ > 600) {
+  if (mouvX++ > 900) {
     mouvX = 0;
   }
-  if (frameX < 8) {
-    mouvX++;
-    frameX++;
-  } else {
-    frameX = 0;
-    mouvX++;
+  if (gameFrame % staggerFrames == 0) {
+    if (frameX < 8) {
+      frameX++;
+    } else {
+      frameX = 0;
+    }
   }
 
+  mouvX++;
+  gameFrame++;
   requestAnimationFrame(animate);
 }
 
