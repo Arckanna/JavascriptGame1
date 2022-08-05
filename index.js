@@ -1,4 +1,4 @@
-let playerState = "Cours";
+let playerState = "Attends";
 const dropdown = document.getElementById("animations");
 dropdown.addEventListener("change", function (e) {
   playerState = e.target.value;
@@ -76,9 +76,8 @@ animationStates.forEach((state, index) => {
   spriteAnimations[state.name] = frames;
 });
 
-console.log(spriteAnimations[playerState].loc.length);
 //avancer
-let mouvX = 0;
+let mouvX = 450;
 
 const playerImage = new Image();
 playerImage.src = "images/shadow_dog.png";
@@ -102,11 +101,14 @@ function animate() {
     CANVAS_WIDTH / 2,
     CANVAS_HEIGHT / 2
   );
-  if (mouvX++ > 900) {
+  if (mouvX > 900) {
     mouvX = 0;
   }
+  console.log(mouvX);
+  if (playerState == "Cours" || playerState == "Roule") {
+    mouvX++;
+  }
 
-  mouvX++;
   gameFrame++;
   requestAnimationFrame(animate);
 }
